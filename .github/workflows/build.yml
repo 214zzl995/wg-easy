@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     container: node:22.13.1-alpine
     steps:
+    
+      - name: Install git
+        run: apk add --no-cache git
+        
       - name: Checkout code
         uses: actions/checkout@v3
 
