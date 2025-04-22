@@ -34,6 +34,7 @@ jobs:
         run: |
           cd src
           tar -czf wg-easy-output.tar.gz .output
+          mv wg-easy-output.tar.gz $GITHUB_WORKSPACE
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -52,3 +53,15 @@ jobs:
           git push https://${GH_TOKEN}@github.com/${{ github.repository }} :refs/tags/latest || true
           git tag -a latest -m "Auto tag to latest at $(date)"
           git push https://${GH_TOKEN}@github.com/${{ github.repository }} latest --force
+
+      - name: Create or Update Release on latest tag
+        uses: ncipollo/release-action@v1
+        with:
+          tag: latest
+          name: Latest Release
+          body: |
+            This release is automatically published at the HEAD of the main branch. Every push to main automatically refreshes the latest tag and artifacts.
+          allowUpdates: true               
+          replaceAssets: true             
+          artifacts: wg-easy-output.tar.gz 
+          token: ${{ secrets.PUSH_TOKEN }}
