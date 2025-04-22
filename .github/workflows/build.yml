@@ -46,8 +46,8 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin main
-          git checkout main
+          git fetch origin master
+          git checkout master
           git tag -d latest || true
           git push https://${GH_TOKEN}@github.com/${{ github.repository }} :refs/tags/latest || true
           git tag -a latest -m "Auto tag to latest at $(date)"
