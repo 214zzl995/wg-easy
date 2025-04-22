@@ -1,0 +1,42 @@
+name: Build wg-easy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install pnpm
+        run: |
+          npm install -g corepack
+          corepack enable
+          corepack prepare pnpm@latest --activate
+
+      - name: Install dependencies & build (frontend)
+        run: |
+          cd src
+          NUXT_TELEMETRY_DISABLED=1 pnpm install --frozen-lockfile
+          pnpm build
+
+      - name: Archive build outputs
+        run: |
+          cd src
+          tar -czf wg-easy-output.tar.gz .output
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wg-easy-output
+          path: src/wg-easy-output.tar.gz
