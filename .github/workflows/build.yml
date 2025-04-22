@@ -40,7 +40,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: wg-easy-output
-          path: src/wg-easy-output.tar.gz
+          path: wg-easy-output.tar.gz
+          
       - name: Move latest tag to HEAD and push
         env:
           GH_TOKEN: ${{ secrets.PUSH_TOKEN }}
@@ -62,6 +63,6 @@ jobs:
           body: |
             This release is automatically published at the HEAD of the main branch. Every push to main automatically refreshes the latest tag and artifacts.
           allowUpdates: true               
-          replaceAssets: true             
+          replacesArtifacts: true             
           artifacts: wg-easy-output.tar.gz 
           token: ${{ secrets.PUSH_TOKEN }}
