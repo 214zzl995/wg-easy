@@ -18,6 +18,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Mark repo as safe for git
+        run: git config --global --add safe.directory /__w/wg-easy/wg-easy
+
       - name: Install pnpm
         run: |
           npm install -g corepack
