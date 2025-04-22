@@ -36,6 +36,10 @@ jobs:
       - name: Archive build outputs
         run: |
           cd src
+          mkdir -p .output/server/database
+          mkdir -p .output/cli
+          cp -r server/database/migrations .output/server/database/migrations
+          cp cli/cli.sh .output/cli/cli.sh
           tar -czf wg-easy-output.tar.gz .output
           mv wg-easy-output.tar.gz $GITHUB_WORKSPACE
 
