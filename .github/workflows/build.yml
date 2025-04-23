@@ -51,7 +51,7 @@ jobs:
           
       - name: Move latest tag to HEAD and push
         env:
-          GH_TOKEN: ${{ secrets.PUSH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -72,4 +72,4 @@ jobs:
           allowUpdates: true               
           replacesArtifacts: true             
           artifacts: wg-easy-output.tar.gz 
-          token: ${{ secrets.PUSH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
