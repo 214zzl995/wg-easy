@@ -12,9 +12,8 @@ jobs:
     container: node:22.13.1-alpine
     steps:
     
-      - name: Install dependencies
-        run: |
-          apk add --no-cache git python3 make g++ sqlite-dev
+      - name: Install git
+        run: apk add --no-cache git
         
       - name: Checkout code
         uses: actions/checkout@v3
@@ -31,6 +30,7 @@ jobs:
       - name: Install dependencies & build (frontend)
         run: |
           cd src
+          pnpm add @libsql/linux-x64-musl
           NUXT_TELEMETRY_DISABLED=1 pnpm install --frozen-lockfile
           pnpm build
 
