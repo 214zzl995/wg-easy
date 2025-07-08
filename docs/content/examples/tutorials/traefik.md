@@ -141,7 +141,7 @@ sudo docker network create traefik
 ## Start traefik
 
 ```shell
-sudo docker-compose up -d
+sudo docker compose up -d
 ```
 
 You can no access the Traefik dashboard at `https://traefik.$example.com$` with the credentials you set in `traefik_dynamic.yml`.
@@ -166,6 +166,7 @@ services:
       - "traefik.http.routers.wg-easy.entrypoints=websecure"
       - "traefik.http.routers.wg-easy.service=wg-easy"
       - "traefik.http.services.wg-easy.loadbalancer.server.port=51821"
+      - "traefik.docker.network=traefik"
     ...
 
 networks:
@@ -178,7 +179,7 @@ networks:
 
 ```shell
 cd /etc/docker/containers/wg-easy
-sudo docker-compose up -d
+sudo docker compose up -d
 ```
 
 You can now access `wg-easy` at `https://wg-easy.$example.com$` and start the setup.
