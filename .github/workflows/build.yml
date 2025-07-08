@@ -12,8 +12,9 @@ jobs:
     container: node:22.13.1-alpine
     steps:
     
-      - name: Install git
-        run: apk add --no-cache git
+      - name: Install dependencies
+        run: |
+          apk add --no-cache git python3 make g++ sqlite-dev
         
       - name: Checkout code
         uses: actions/checkout@v3
