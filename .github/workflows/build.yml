@@ -40,7 +40,7 @@ jobs:
           mkdir -p .output/cli
           cp -r server/database/migrations .output/server/database/migrations
           cp cli/cli.sh .output/cli/cli.sh
-          tar -czf wg-easy-output.tar.gz -C .output *
+          (cd .output && tar -czf ../wg-easy-output.tar.gz .)
           mv wg-easy-output.tar.gz $GITHUB_WORKSPACE
 
       - name: Upload Artifact
